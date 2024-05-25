@@ -1,6 +1,7 @@
 package com.test.aplicashier;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +21,8 @@ public class ListProduk extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_produk);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         recyclerViewProduk = findViewById(R.id.recyclerViewProduk);
         recyclerViewProduk.setLayoutManager(new LinearLayoutManager(this));
 
@@ -31,5 +34,14 @@ public class ListProduk extends AppCompatActivity {
 
         produkAdapter = new ProdukAdapter(produkList);
         recyclerViewProduk.setAdapter(produkAdapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
