@@ -71,9 +71,12 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/cetakNotaButton"
-        android:layout_width="match_parent"
+        android:id="@+id/buttonListProduk"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cetak Nota" />
+        android:text="Lihat Daftar Produk"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"/>
+
 
 </LinearLayout>

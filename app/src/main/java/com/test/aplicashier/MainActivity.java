@@ -37,8 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
     // Database produk (kode, nama, harga)
     private Map<String, Produk> database = new HashMap<String, Produk>() {{
-        put("123456", new Produk("Produk A", 10000));
-        put("789012", new Produk("Produk B", 20000));
+        put("8992753282401", new Produk("8992753282401","123 BENDERA COKLAT 300G", 19600));
+        put("711844110069", new Produk("711844110069","ABC KECAP MANIS SEDANG 620ML", 17400));
+        put("711844120105", new Produk("711844120105","ABC SAMBAL MANIS PEDAS 135ML", 4200));
     }};
 
     @Override
@@ -102,6 +103,17 @@ public class MainActivity extends AppCompatActivity {
                 hitungKembalian();
             }
         });
+
+        // Di dalam method onCreate() di MainActivity.java
+        Button listProdukButton = findViewById(R.id.buttonListProduk);
+        listProdukButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ListProduk.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -202,13 +214,19 @@ public class MainActivity extends AppCompatActivity {
         return format.format(number).replace("Rp", "Rp ").replace(",00", "");
     }
 
-    private static class Produk {
+    public static class Produk {
+        private String kodeQR;
         private String nama;
         private int harga;
 
-        public Produk(String nama, int harga) {
+        public Produk(String kodeQR, String nama, int harga) {
+            this.kodeQR = kodeQR;
             this.nama = nama;
             this.harga = harga;
+        }
+
+        public String getKodeQR() {
+            return kodeQR;
         }
 
         public String getNama() {
