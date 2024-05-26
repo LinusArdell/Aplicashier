@@ -16,14 +16,6 @@
         android:theme="@style/Theme.Aplicashier"
         tools:targetApi="31">
         <activity
-            android:name=".Dashboard"
-            android:exported="false"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ListProduk"
-            android:exported="false"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KasirApp</string>
+    <string name="app_name">Aplicashier</string>
     <string name="nav_cashier">Cashier</string>
     <string name="nav_home">Home</string>
     <string name="nav_list_produk">List Produk</string>
