@@ -4,23 +4,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.ProdukViewHolder> {
 
-    private List<MainActivity.Produk> produkList;
-    private List<MainActivity.Produk> produkListFull;
+    private List<Produk> produkList;
+    private List<Produk> produkListFull;
 
-    public ProdukAdapter(List<MainActivity.Produk> produkList) {
+    public ProdukAdapter(List<Produk> produkList) {
         this.produkList = produkList;
-        produkListFull = new ArrayList<>(produkList); // Copy of full list
+        produkListFull = new ArrayList<>(produkList);
     }
 
     @NonNull
@@ -32,33 +28,15 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.ProdukView
 
     @Override
     public void onBindViewHolder(@NonNull ProdukViewHolder holder, int position) {
-        MainActivity.Produk produk = produkList.get(position);
-        holder.textViewKodeQR.setText(produk.getKodeQR());
+        Produk produk = produkList.get(position);
+        holder.textViewKodeQR.setText(produk.getKode());
         holder.textViewNamaProduk.setText(produk.getNama());
-        holder.textViewHargaProduk.setText(formatRupiah(produk.getHarga()));
+        holder.textViewHargaProduk.setText(String.format("Rp %,d", produk.getHarga()));
     }
 
     @Override
     public int getItemCount() {
         return produkList.size();
-    }
-
-    public static class ProdukViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewKodeQR;
-        TextView textViewNamaProduk;
-        TextView textViewHargaProduk;
-
-        public ProdukViewHolder(@NonNull View itemView) {
-            super(itemView);
-            textViewKodeQR = itemView.findViewById(R.id.textViewKodeQR);
-            textViewNamaProduk = itemView.findViewById(R.id.textViewNamaProduk);
-            textViewHargaProduk = itemView.findViewById(R.id.textViewHargaProduk);
-        }
-    }
-
-    private String formatRupiah(int number) {
-        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
-        return format.format(number).replace("Rp", "Rp ").replace(",00", "");
     }
 
     public void filter(String text) {
@@ -67,12 +45,23 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.ProdukView
             produkList.addAll(produkListFull);
         } else {
             text = text.toLowerCase();
-            for (MainActivity.Produk item : produkListFull) {
-                if (item.getNama().toLowerCase().contains(text)) {
-                    produkList.add(item);
+            for (Produk produk : produkListFull) {
+                if (produk.getNama().toLowerCase().contains(text)) {
+                    produkList.add(produk);
                 }
             }
         }
         notifyDataSetChanged();
+    }
+
+    class ProdukViewHolder extends RecyclerView.ViewHolder {
+        TextView textViewKodeQR, textViewNamaProduk, textViewHargaProduk;
+
+        ProdukViewHolder(@NonNull View itemView) {
+            super(itemView);
+            textViewKodeQR = itemView.findViewById(R.id.textViewKodeQR);
+            textViewNamaProduk = itemView.findViewById(R.id.textViewNamaProduk);
+            textViewHargaProduk = itemView.findViewById(R.id.textViewHargaProduk);
+        }
     }
 }

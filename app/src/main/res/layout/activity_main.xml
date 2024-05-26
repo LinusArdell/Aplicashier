@@ -1,82 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Total Belanja:"
-        android:textSize="18sp" />
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_navigation" />
 
-    <EditText
-        android:id="@+id/totalBelanjaEditText"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:enabled="false"
-        android:focusable="false" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Jumlah Bayar:"
-        android:textSize="18sp" />
-
-    <EditText
-        android:id="@+id/jumlahBayarEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kembalian:"
-        android:textSize="18sp" />
-
-    <EditText
-        android:id="@+id/kembalianEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:enabled="false"
-        android:focusable="false" />
-
-    <Button
-        android:id="@+id/scanButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Scan Produk" />
-
-    <Button
-        android:id="@+id/hitungButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hitung Kembalian" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rincian Kembalian:"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/kembalianDetailTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/buttonListProduk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lihat Daftar Produk"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"/>
-
-
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_navigation_menu" />
+</RelativeLayout>
