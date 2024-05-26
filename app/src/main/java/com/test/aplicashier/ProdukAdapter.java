@@ -9,15 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.ProdukViewHolder> {
 
     private List<MainActivity.Produk> produkList;
+    private List<MainActivity.Produk> produkListFull;
 
     public ProdukAdapter(List<MainActivity.Produk> produkList) {
         this.produkList = produkList;
+        produkListFull = new ArrayList<>(produkList); // Copy of full list
     }
 
     @NonNull
@@ -56,5 +59,20 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.ProdukView
     private String formatRupiah(int number) {
         NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
         return format.format(number).replace("Rp", "Rp ").replace(",00", "");
+    }
+
+    public void filter(String text) {
+        produkList.clear();
+        if (text.isEmpty()) {
+            produkList.addAll(produkListFull);
+        } else {
+            text = text.toLowerCase();
+            for (MainActivity.Produk item : produkListFull) {
+                if (item.getNama().toLowerCase().contains(text)) {
+                    produkList.add(item);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

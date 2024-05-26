@@ -1,7 +1,7 @@
 package com.test.aplicashier;
 
 import android.os.Bundle;
-import android.view.MenuItem;
+import androidx.appcompat.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,15 +15,16 @@ public class ListProduk extends AppCompatActivity {
     private RecyclerView recyclerViewProduk;
     private ProdukAdapter produkAdapter;
     private List<MainActivity.Produk> produkList = new ArrayList<>();
+    private SearchView searchViewProduk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_produk);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         recyclerViewProduk = findViewById(R.id.recyclerViewProduk);
+        searchViewProduk = findViewById(R.id.searchViewProduk);
+
         recyclerViewProduk.setLayoutManager(new LinearLayoutManager(this));
 
         // Tambahkan produk ke dalam list
@@ -34,14 +35,20 @@ public class ListProduk extends AppCompatActivity {
 
         produkAdapter = new ProdukAdapter(produkList);
         recyclerViewProduk.setAdapter(produkAdapter);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        // Setup SearchView
+        searchViewProduk.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                produkAdapter.filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                produkAdapter.filter(newText);
+                return false;
+            }
+        });
     }
 }
