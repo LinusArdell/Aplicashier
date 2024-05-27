@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".TambahProduk">
+
+    <EditText
+        android:id="@+id/editTextKodeBarcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Kode Barcode"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editTextNamaProduk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nama Produk"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editTextHargaProduk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Harga Produk"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/buttonTambahProduk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tambah Produk" />
+
+</LinearLayout>

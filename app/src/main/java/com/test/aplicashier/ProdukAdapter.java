@@ -12,26 +12,27 @@ import java.util.List;
 public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.ProdukViewHolder> {
 
     private List<Produk> produkList;
-    private List<Produk> produkListFull;
+    private List<Produk> produkListFull; // Full list for search filtering
 
     public ProdukAdapter(List<Produk> produkList) {
         this.produkList = produkList;
-        produkListFull = new ArrayList<>(produkList);
+        produkListFull = new ArrayList<>(produkList); // Copy of full list
     }
 
     @NonNull
     @Override
     public ProdukViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_produk, parent, false);
-        return new ProdukViewHolder(view);
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_produk, parent, false);
+        return new ProdukViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ProdukViewHolder holder, int position) {
         Produk produk = produkList.get(position);
-        holder.textViewKodeQR.setText(produk.getKode());
-        holder.textViewNamaProduk.setText(produk.getNama());
-        holder.textViewHargaProduk.setText(String.format("Rp %,d", produk.getHarga()));
+        holder.kodeTextView.setText(produk.getKode());
+        holder.namaTextView.setText(produk.getNama());
+        holder.hargaTextView.setText(String.valueOf(produk.getHarga()));
     }
 
     @Override
@@ -39,29 +40,20 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.ProdukView
         return produkList.size();
     }
 
-    public void filter(String text) {
-        produkList.clear();
-        if (text.isEmpty()) {
-            produkList.addAll(produkListFull);
-        } else {
-            text = text.toLowerCase();
-            for (Produk produk : produkListFull) {
-                if (produk.getNama().toLowerCase().contains(text)) {
-                    produkList.add(produk);
-                }
-            }
-        }
+    public void searchDataList(List<Produk> searchList) {
+        produkList = searchList;
         notifyDataSetChanged();
     }
 
     class ProdukViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewKodeQR, textViewNamaProduk, textViewHargaProduk;
+        TextView kodeTextView, namaTextView, hargaTextView;
 
-        ProdukViewHolder(@NonNull View itemView) {
+        ProdukViewHolder(View itemView) {
             super(itemView);
-            textViewKodeQR = itemView.findViewById(R.id.textViewKodeQR);
-            textViewNamaProduk = itemView.findViewById(R.id.textViewNamaProduk);
-            textViewHargaProduk = itemView.findViewById(R.id.textViewHargaProduk);
+            kodeTextView = itemView.findViewById(R.id.textViewKodeQR);
+            namaTextView = itemView.findViewById(R.id.textViewNamaProduk);
+            hargaTextView = itemView.findViewById(R.id.textViewHargaProduk);
         }
     }
 }
+

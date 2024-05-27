@@ -35,22 +35,6 @@ public class CashierFragment extends Fragment {
     private int totalBelanja = 0;
     private Map<String, Integer> itemDetails = new HashMap<>();
 
-    // Database produk (kode, nama, harga)
-    private Map<String, Produk> database = new HashMap<String, Produk>() {{
-        put("8992753282401", new Produk("8992753282401","123 BENDERA COKLAT 300G", 19600));
-        put("711844110069", new Produk("711844110069","ABC KECAP MANIS SEDANG 620ML", 17400));
-        put("711844120105", new Produk("711844120105","ABC SAMBAL MANIS PEDAS 135ML", 4200));
-
-        put("8999909192034", new Produk("8999909192034", "2.3.4 FILTER", 86000));
-        put("711844150003", new Produk("711844150003", "ABC SYRUP APOLO 580ML ORANGE", 11200));
-        put("8992772122245", new Produk("8992772122245", "ADAM SARI 1PAPAN", 24800));
-        put("8999918183085", new Produk("8999918183085", "AIM BISC 120G BUTTER COCONUT", 2900));
-        put("8993560066116", new Produk("8993560066116", "AIR WICK CLICK SPR 15ML LAVENDER", 15400));
-        put("9555540000979", new Produk("9555540000979", "ALFREDO 100G SGR FREE ALMOND", 18500));
-        put("8993417374234", new Produk("8993417374234", "ESKULIN KIDS F.BODY WASH 175ML SPRI", 11600));
-        put("9556852990323", new Produk("9556852990323", "EVER D.COOKIES 454G DANISH(BR MUDA)", 27000));
-    }};
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -140,8 +124,8 @@ public class CashierFragment extends Fragment {
             } else {
                 // Scan berhasil
                 String kode = result.getContents();
-                if (database.containsKey(kode)) {
-                    Produk produk = database.get(kode);
+                Produk produk = getProdukByKode(kode);
+                if (produk != null) {
                     showJumlahDialog(produk);
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -153,6 +137,15 @@ public class CashierFragment extends Fragment {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private Produk getProdukByKode(String kode) {
+        for (Produk produk : ProdukDatabase.getProdukList()) {
+            if (produk.getKode().equals(kode)) {
+                return produk;
+            }
+        }
+        return null;
     }
 
     private void showJumlahDialog(final Produk produk) {

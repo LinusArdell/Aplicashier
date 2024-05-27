@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "769316387281",
+    "project_id": "aplicashier",
+    "storage_bucket": "aplicashier.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769316387281:android:ede6d52dee027f6a1f88f0",
+        "android_client_info": {
+          "package_name": "com.test.aplicashier"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLlFZauiTL46lLs5O4Krfa4E71BnLp7Ws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

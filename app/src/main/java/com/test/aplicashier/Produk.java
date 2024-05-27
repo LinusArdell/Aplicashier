@@ -5,6 +5,10 @@ public class Produk {
     private String nama;
     private int harga;
 
+    public Produk() {
+        // Default constructor required for calls to DataSnapshot.getValue(Produk.class)
+    }
+
     public Produk(String kode, String nama, int harga) {
         this.kode = kode;
         this.nama = nama;
