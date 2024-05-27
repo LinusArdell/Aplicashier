@@ -11,7 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total Belanja:"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textColor="@color/main_color"/>
 
     <EditText
         android:id="@+id/totalBelanjaEditText"
@@ -25,7 +26,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Jumlah Bayar:"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textColor="@color/main_color"/>
 
     <EditText
         android:id="@+id/jumlahBayarEditText"
@@ -37,7 +39,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Kembalian:"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textColor="@color/main_color"/>
 
     <EditText
         android:id="@+id/kembalianEditText"
@@ -63,12 +66,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Rincian Kembalian:"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textColor="@color/main_color"/>
 
     <TextView
         android:id="@+id/kembalianDetailTextView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="@color/main_color"/>
 
     <Button
         android:id="@+id/buttonListProduk"

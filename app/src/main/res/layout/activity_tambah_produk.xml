@@ -3,35 +3,108 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="10dp"
     tools:context=".TambahProduk">
 
-    <EditText
-        android:id="@+id/editTextKodeBarcode"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Kode Barcode"
-        android:inputType="text" />
+        android:layout_height="match_parent"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        android:layout_margin="8dp">
 
-    <EditText
-        android:id="@+id/editTextNamaProduk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nama Produk"
-        android:inputType="text" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/custom_edittext"
+            android:padding="10dp">
 
-    <EditText
-        android:id="@+id/editTextHargaProduk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Harga Produk"
-        android:inputType="number" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/container_1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_kode"
+                    android:text="Kode Barcode : "
+                    android:textSize="20dp"
+                    android:textColor="@color/main_color"
+                    android:layout_centerVertical="true"/>
 
-    <Button
-        android:id="@+id/buttonTambahProduk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tambah Produk" />
+                <EditText
+                    android:id="@+id/editTextKodeBarcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=""
+                    android:inputType="text"
+                    android:textSize="20dp"
+                    android:layout_toEndOf="@+id/tv_kode"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/container_2"
+                android:layout_below="@+id/container_1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_nama"
+                    android:text="Nama Produk : "
+                    android:textSize="20dp"
+                    android:textColor="@color/main_color"
+                    android:layout_centerVertical="true"/>
+
+                <EditText
+                    android:id="@+id/editTextNamaProduk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=""
+                    android:inputType="text"
+                    android:layout_toEndOf="@id/tv_nama"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/container_3"
+                android:layout_below="@id/container_2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_harga"
+                    android:text="Harga Produk : "
+                    android:textSize="20dp"
+                    android:textColor="@color/main_color"
+                    android:layout_centerVertical="true"/>
+
+                <EditText
+                    android:id="@+id/editTextHargaProduk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=""
+                    android:inputType="number"
+                    android:layout_toEndOf="@+id/tv_harga"/>
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/buttonTambahProduk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tambah Produk"
+                android:layout_alignParentBottom="true"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

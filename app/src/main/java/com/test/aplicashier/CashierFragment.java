@@ -12,13 +12,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -35,6 +45,9 @@ public class CashierFragment extends Fragment {
     private int totalBelanja = 0;
     private Map<String, Integer> itemDetails = new HashMap<>();
 
+    private DatabaseReference databaseProduk;
+    private List<Produk> produkList = new ArrayList<>(); // List untuk menyimpan data produk dari Firebase
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,6 +60,12 @@ public class CashierFragment extends Fragment {
         scanButton = view.findViewById(R.id.scanButton);
         hitungButton = view.findViewById(R.id.hitungButton);
         buttonListProduk = view.findViewById(R.id.buttonListProduk);
+
+        // Initialize Firebase reference
+        databaseProduk = FirebaseDatabase.getInstance().getReference("produk");
+
+        // Fetch products from Firebase
+        fetchProductsFromFirebase();
 
         buttonListProduk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +130,25 @@ public class CashierFragment extends Fragment {
         return view;
     }
 
+    private void fetchProductsFromFirebase() {
+        databaseProduk.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                produkList.clear();
+                for (DataSnapshot produkSnapshot : dataSnapshot.getChildren()) {
+                    Produk produk = produkSnapshot.getValue(Produk.class);
+                    produkList.add(produk);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle possible errors
+                Toast.makeText(getContext(), "Gagal mengambil data produk", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -140,7 +178,7 @@ public class CashierFragment extends Fragment {
     }
 
     private Produk getProdukByKode(String kode) {
-        for (Produk produk : ProdukDatabase.getProdukList()) {
+        for (Produk produk : produkList) { // Iterate through the Firebase product list
             if (produk.getKode().equals(kode)) {
                 return produk;
             }
@@ -150,7 +188,7 @@ public class CashierFragment extends Fragment {
 
     private void showJumlahDialog(final Produk produk) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Masukkan Jumlah");
+        builder.setTitle("Masukkan Qty : ");
         final EditText input = new EditText(getActivity());
         input.setInputType(android.text.InputType.TYPE_CLASS_NUMBER);
         builder.setView(input);
