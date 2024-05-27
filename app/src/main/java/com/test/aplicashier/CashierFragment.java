@@ -238,7 +238,7 @@ public class CashierFragment extends Fragment {
 
     private String rincianKembalian(int kembalian) {
         StringBuilder hasil = new StringBuilder();
-        int[] pecahan = {100000, 50000, 20000, 10000, 5000, 2000, 1000, 500, 200, 100};
+        int[] pecahan = {50000, 20000, 10000, 5000, 2000, 1000, 500, 200, 100};
 
         for (int uang : pecahan) {
             if (kembalian >= uang) {
